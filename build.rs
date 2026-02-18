@@ -11,17 +11,23 @@ fn main() {
 
     // The file `memory.x` is loaded by cortex-m-rt's `link.x` script, which
     // is what we specify in `.cargo/config.toml` for Arm builds
+    // switch between memory.x and memory_4mb.x for 2mb and 4mb flash respectively.
+     
+    {% if flashcap == "2MB" -%}
     let memory_x = include_bytes!("memory.x");
     let mut f = File::create(out.join("memory.x")).unwrap();
+
+    {% else -%}
+
+    let memory_x = include_bytes!("memory_4mb.x");
+    let mut f = File::create(out.join("memory_4mb.x")).unwrap();
+    
+    {% endif %}
+
+
     f.write_all(memory_x).unwrap();
     println!("cargo:rerun-if-changed=memory.x");
 
-    // The file `rp235x_riscv.x` is what we specify in `.cargo/config.toml` for
-    // RISC-V builds
-    let rp235x_riscv_x = include_bytes!("rp235x_riscv.x");
-    let mut f = File::create(out.join("rp235x_riscv.x")).unwrap();
-    f.write_all(rp235x_riscv_x).unwrap();
-    println!("cargo:rerun-if-changed=rp235x_riscv.x");
 
     println!("cargo:rerun-if-changed=build.rs");
 }

@@ -15,3 +15,9 @@ default = "embassy"
 type = "bool"
 prompt = "Enable defmt logging?"
 default = true
+
+[placeholders.flashcap]
+type = "string"
+prompt = "How much flash?"
+choices = ["2MB", "4MB"]
+default = "4MB"

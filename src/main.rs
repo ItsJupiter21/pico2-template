@@ -16,6 +16,8 @@ use {panic_probe as _};
 {% if defmt -%}
 // Defmt Logging
 use defmt_rtt as _;
+use defmt::{warn, info, error};
+
 {% endif %}
 /// Tell the Boot ROM about our application
 #[unsafe(link_section = ".start_block")]
