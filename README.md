@@ -5,6 +5,7 @@
 - better defmt support
 - vsc settings and debug config
 - Minor changes
+- add probe-rs option on config.toml
 
 # Pico 2 Template
 A Rust project template for Raspberry Pi Pico 2 (RP2350) development.

@@ -17,13 +17,6 @@ fn main() {
     let memory_x = include_bytes!("memory.x");
     let mut f = File::create(out.join("memory.x")).unwrap();
 
-    {% else -%}
-
-    let memory_x = include_bytes!("memory_4mb.x");
-    let mut f = File::create(out.join("memory_4mb.x")).unwrap();
-    
-    {% endif %}
-
 
     f.write_all(memory_x).unwrap();
     println!("cargo:rerun-if-changed=memory.x");
