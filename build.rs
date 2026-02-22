@@ -12,15 +12,12 @@ fn main() {
     // The file `memory.x` is loaded by cortex-m-rt's `link.x` script, which
     // is what we specify in `.cargo/config.toml` for Arm builds
     // switch between memory.x and memory_4mb.x for 2mb and 4mb flash respectively.
-     
-    {% if flashcap == "2MB" -%}
+
     let memory_x = include_bytes!("memory.x");
     let mut f = File::create(out.join("memory.x")).unwrap();
 
-
     f.write_all(memory_x).unwrap();
     println!("cargo:rerun-if-changed=memory.x");
-
 
     println!("cargo:rerun-if-changed=build.rs");
 }
